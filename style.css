@@ -1,0 +1,271 @@
+:root {
+    --ease-elastic: cubic-bezier(0.22, 1.25, 0.44, 1.02); /* Custom easing for the bounce effect */
+    --duration-morph: 0.8s;
+    --duration-fade: 0.3s;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    color: #fff;
+    overflow: hidden;
+    background-color: #111;
+}
+
+.background-gradient {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background: radial-gradient(circle at 10% 20%, rgba(118, 75, 162, 0.4), transparent 40%),
+                radial-gradient(circle at 80% 70%, rgba(62, 149, 219, 0.4), transparent 40%);
+    animation: move-gradient 20s ease-in-out infinite;
+}
+
+@keyframes move-gradient {
+    0%, 100% { background-position: 0% 0%; }
+    50% { background-position: 100% 100%; }
+}
+
+.main-header {
+    text-align: center;
+    position: absolute;
+    top: 15%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 0;
+}
+
+.main-header h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    letter-spacing: -1px;
+}
+
+.main-header p {
+    font-size: 1.1rem;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+main {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    perspective: 1000px;
+}
+
+/* The Core Glass UI Styles */
+#glass-container {
+    position: relative;
+    background: rgba(35, 35, 45, 0.25);
+    backdrop-filter: blur(25px) saturate(180%);
+    -webkit-backdrop-filter: blur(25px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    transition: width var(--duration-morph) var(--ease-elastic),
+                height var(--duration-morph) var(--ease-elastic),
+                border-radius var(--duration-morph) var(--ease-elastic);
+    overflow: hidden;
+}
+
+/* The Interactive Light Glow Effect */
+#glass-container::before {
+    content: '';
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.3) 0%, transparent 60%);
+    top: var(--mouse-y, 50%);
+    left: var(--mouse-x, 50%);
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 0;
+    transition: transform 0.4s ease, opacity 0.4s ease;
+    pointer-events: none;
+    z-index: 1;
+}
+
+#glass-container:hover::before {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+}
+
+#glass-container:active::before {
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.5) 0%, transparent 50%);
+    transform: translate(-50%, -50%) scale(1.1);
+}
+
+/* Container States (Shape-shifting) */
+#glass-container.state-nav {
+    width: 280px;
+    height: 70px;
+    border-radius: 50px; /* Pill shape */
+}
+
+#glass-container.state-content {
+    width: 500px;
+    height: 350px;
+    border-radius: 24px; /* Rounded rectangle */
+}
+
+/* Content inside the glass */
+#glass-content {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    padding: 15px;
+    opacity: 0;
+    transform: scale(0.95);
+    transition: opacity var(--duration-fade) ease-out, transform var(--duration-fade) ease-out;
+    position: relative;
+    z-index: 2;
+}
+
+#glass-content.visible {
+    opacity: 1;
+    transform: scale(1);
+    transition-delay: 0.4s; /* Wait for morph to be mostly done */
+}
+
+/* Buttons and Content Styles */
+.glass-button, .back-button {
+    background: transparent;
+    border: none;
+    color: rgba(255, 255, 255, 0.9);
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 50%;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.2s ease;
+}
+
+.glass-button svg {
+    width: 24px;
+    height: 24px;
+    pointer-events: none;
+}
+
+.glass-button:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.back-button {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: auto;
+    padding: 8px 20px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.back-button:hover {
+    background: rgba(0, 0, 0, 0.4);
+}
+
+.content-section {
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    padding: 20px 30px;
+}
+
+.content-section h2 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    color: #fff;
+}
+
+.content-section p {
+    color: rgba(255, 255, 255, 0.8);
+    line-height: 1.6;
+    max-width: 90%;
+    margin: 0 auto 20px auto;
+}
+
+.content-section ul {
+    list-style: none;
+    text-align: left;
+    max-width: 80%;
+    margin: 0 auto;
+}
+
+.content-section ul li {
+    margin-bottom: 12px;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.content-section ul li span {
+    font-weight: 500;
+    color: #fff;
+    display: inline-block;
+    width: 80px;
+}
+
+.project-item {
+    margin-bottom: 20px;
+    background: rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    border-radius: 12px;
+}
+
+.project-item h3 {
+    margin-bottom: 5px;
+    color: #fff;
+}
+
+.contact-links {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 25px;
+}
+
+.contact-links a {
+    color: #fff;
+    text-decoration: none;
+    padding: 10px 20px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 20px;
+    transition: background-color 0.2s ease;
+}
+
+.contact-links a:hover {
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+
+/* Responsive Adjustments */
+@media (max-width: 600px) {
+    #glass-container.state-content {
+        width: 90vw;
+        height: 60vh;
+    }
+    .main-header h1 {
+        font-size: 2rem;
+    }
+}
