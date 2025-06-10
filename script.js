@@ -4,31 +4,34 @@ document.addEventListener('DOMContentLoaded', () => {
     let mouseY = window.innerHeight / 2;
     let blobX = mouseX;
     let blobY = mouseY;
-    const speed = 0.05; // Controls the "elasticity". Lower value = more lag.
 
-    // Update mouse coordinates
+    // This value controls the "elasticity" or "lag" of the blob.
+    // Lower value = more lag and a more 'fluid' feel.
+    const speed = 0.05; 
+
+    // Update mouse coordinates when the mouse moves
     document.body.addEventListener('mousemove', (e) => {
         mouseX = e.clientX;
         mouseY = e.clientY;
     });
 
-    // Animation loop for smooth movement
+    // Animation loop for smooth, continuous movement
     function animate() {
-        // Calculate the distance to the target
+        // Calculate the distance between the blob's current position and the mouse
         const dx = mouseX - blobX;
         const dy = mouseY - blobY;
 
-        // Move the blob a fraction of the distance
+        // Move the blob a fraction of the distance towards the mouse
         blobX += dx * speed;
         blobY += dy * speed;
 
-        // Apply the new position
-        blob.style.transform = `translate(${blobX - blob.offsetWidth / 2}px, ${blobY - blob.offsetHeight / 2}px)`;
+        // Apply the updated position. We center the blob on its coordinates.
+        blob.style.transform = `translate(${blobX - (blob.offsetWidth / 2)}px, ${blobY - (blob.offsetHeight / 2)}px)`;
 
-        // Request the next frame
+        // Schedule the next frame of the animation
         requestAnimationFrame(animate);
     }
 
-    // Start the animation
+    // Start the animation loop
     animate();
 });
