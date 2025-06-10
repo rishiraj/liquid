@@ -11,99 +11,100 @@
 </head>
 <body>
 
-    <!-- This is the moving light source -->
     <div id="blob"></div>
 
-    <main class="container">
-      <header class="profile-header">
-        <img src="https://i.ibb.co/6Pz0d7S/profile-placeholder.png" alt="Rishiraj's Profile Picture" class="profile-picture">
-        <h1>Hi, I'm Rishiraj Acharya 👋</h1>
-        <b>AI Engineer | Google Developer Expert (ML, Cloud, Kaggle) | Hugging Face 🤗 Fellow</b>
-      </header>
+    <div class="container-wrapper">
+        <main id="container" class="container">
+            <header class="profile-header">
+                <img src="https://i.ibb.co/6Pz0d7S/profile-placeholder.png" alt="Rishiraj's Profile Picture" class="profile-picture reveal">
+                <h1 class="reveal" data-delay="100">Hi, I'm Rishiraj Acharya 👋</h1>
+                <b class="reveal" data-delay="200">AI Engineer | Google Developer Expert (ML, Cloud, Kaggle) | Hugging Face 🤗 Fellow</b>
+            </header>
 
-      <hr class="section-divider">
+            <hr class="section-divider reveal" data-delay="300">
 
-      <section id="who-i-am">
-        <h2><span class="icon">💡</span> Who I Am</h2>
-        <p>I'm a Machine Learning Engineer currently leading AI development at <strong>IntelliTek</strong>, where I focus on using <strong>Generative AI</strong> to enhance the healthcare domain — automating clinical workflows like SOAP note generation, extracting structured data from unstructured conversations, and ensuring HIPAA-compliant ML pipelines.</p>
-        <p>As a <strong>triple Google Developer Expert</strong> in <strong>Machine Learning</strong>, <strong>Cloud</strong>, and <strong>Kaggle</strong>, I bring both depth and breadth to real-world AI systems. My work sits at the intersection of <strong>NLP</strong>, <strong>Speech Technologies</strong>, and <strong>Medical AI</strong>.</p>
-        <p>
-          <a href="#" class="button-link">👉 Consulting? Here’s how I work</a>
-          <a href="#" class="button-link">🛠️ My GSoC project at TensorFlow</a>
-        </p>
-      </section>
+            <section id="who-i-am" class="reveal" data-delay="400">
+                <h2><span class="icon">💡</span> Who I Am</h2>
+                <p>I'm a Machine Learning Engineer currently leading AI development at <strong>IntelliTek</strong>, where I focus on using <strong>Generative AI</strong> to enhance the healthcare domain — automating clinical workflows like SOAP note generation, extracting structured data from unstructured conversations, and ensuring HIPAA-compliant ML pipelines.</p>
+                <p>As a <strong>triple Google Developer Expert</strong> in <strong>Machine Learning</strong>, <strong>Cloud</strong>, and <strong>Kaggle</strong>, I bring both depth and breadth to real-world AI systems. My work sits at the intersection of <strong>NLP</strong>, <strong>Speech Technologies</strong>, and <strong>Medical AI</strong>.</p>
+                <p>
+                    <a href="#" class="button-link interactive-element">👉 Consulting? Here’s how I work</a>
+                    <a href="#" class="button-link interactive-element">🛠️ My GSoC project at TensorFlow</a>
+                </p>
+            </section>
 
-      <hr class="section-divider">
+            <hr class="section-divider reveal">
 
-      <section id="career-snapshot">
-        <h2><span class="icon">🚀</span> Career Snapshot</h2>
+            <section id="career-snapshot">
+                <h2 class="reveal"><span class="icon">🚀</span> Career Snapshot</h2>
+                
+                <div class="career-item reveal">
+                    <h4>IntelliTek Products Pvt. Ltd. — <em>ML Engineer</em></h4>
+                    <p class="meta">📍 Sep 2024 – Present</p>
+                    <ul>
+                        <li>Designing GenAI solutions for clinical settings: automated SOAP notes, issue lists, and medical summaries.</li>
+                        <li>Built adversarial-robust, compliant pipelines with data security guardrails under HIPAA.</li>
+                    </ul>
+                </div>
 
-        <div class="career-item">
-          <h4>IntelliTek Products Pvt. Ltd. — <em>ML Engineer</em></h4>
-          <p class="meta">📍 Sep 2024 – Present</p>
-          <ul>
-            <li>Designing GenAI solutions for clinical settings: automated SOAP notes, issue lists, and medical summaries.</li>
-            <li>Built adversarial-robust, compliant pipelines with data security guardrails under HIPAA.</li>
-          </ul>
-        </div>
+                <div class="career-item reveal">
+                    <h4>TensorLake Inc. — <em>ML Engineer</em></h4>
+                    <p class="meta">📍 Apr 2024 – Aug 2024</p>
+                    <ul>
+                        <li>Designed <strong>Indexify</strong>, a real-time multimodal unstructured data engine.</li>
+                        <li>Improved processing speed by 30% and boosted query efficiency by 25%.</li>
+                        <li><a href="https://github.com/tensorlakeai/indexify" target="_blank" class="interactive-element">Project Link: Indexify</a></li>
+                    </ul>
+                </div>
 
-        <div class="career-item">
-          <h4>TensorLake Inc. — <em>ML Engineer</em></h4>
-          <p class="meta">📍 Apr 2024 – Aug 2024</p>
-          <ul>
-            <li>Designed <strong>Indexify</strong>, a real-time multimodal unstructured data engine.</li>
-            <li>Improved processing speed by 30% and boosted query efficiency by 25%.</li>
-            <li><a href="https://github.com/tensorlakeai/indexify" target="_blank">Project Link: Indexify</a></li>
-          </ul>
-        </div>
+                <div class="career-item reveal">
+                    <h4>PrediQt Business Solutions Pvt. Ltd. — <em>Senior AI/ML Engineer</em></h4>
+                    <p class="meta">📍 Jun 2023 – Nov 2023</p>
+                    <ul>
+                        <li>Led LLM finetuning and model optimization efforts.</li>
+                        <li>Achieved 40% faster inference and 50% uplift in model serving throughput.</li>
+                    </ul>
+                </div>
 
-        <div class="career-item">
-            <h4>PrediQt Business Solutions Pvt. Ltd. — <em>Senior AI/ML Engineer</em></h4>
-            <p class="meta">📍 Jun 2023 – Nov 2023</p>
-            <ul>
-              <li>Led LLM finetuning and model optimization efforts.</li>
-              <li>Achieved 40% faster inference and 50% uplift in model serving throughput.</li>
-            </ul>
-        </div>
+                <div class="career-item reveal">
+                    <h4>Dynopii Inc. — <em>ML Engineer</em></h4>
+                    <p class="meta">📍 Apr 2021 – Mar 2024</p>
+                    <ul>
+                        <li>Engineered full-stack speech and audio ML pipelines for Conversational AI.</li>
+                        <li>Drove 35% increase in engagement and cut training costs by half.</li>
+                    </ul>
+                </div>
 
-        <div class="career-item">
-          <h4>Dynopii Inc. — <em>ML Engineer</em></h4>
-          <p class="meta">📍 Apr 2021 – Mar 2024</p>
-          <ul>
-            <li>Engineered full-stack speech and audio ML pipelines for Conversational AI.</li>
-            <li>Drove 35% increase in engagement and cut training costs by half.</li>
-          </ul>
-        </div>
-        
-        <div class="career-item">
-          <h4>TensorFlow (Google) — <em>GSoC 2022 Contributor</em></h4>
-          <p class="meta">📍 May 2022 – Sep 2022</p>
-          <ul>
-            <li>Contributed to <a href="https://summerofcode.withgoogle.com/programs/2022/projects/RmEpoyDX" target="_blank">TensorFlow Decision Forests</a>.</li>
-            <li>Created real-world examples for YDF and interpretability tools, boosting adoption by 15%.</li>
-          </ul>
-        </div>
-      </section>
+                <div class="career-item reveal">
+                    <h4>TensorFlow (Google) — <em>GSoC 2022 Contributor</em></h4>
+                    <p class="meta">📍 May 2022 – Sep 2022</p>
+                    <ul>
+                        <li>Contributed to <a href="https://summerofcode.withgoogle.com/programs/2022/projects/RmEpoyDX" target="_blank" class="interactive-element">TensorFlow Decision Forests</a>.</li>
+                        <li>Created real-world examples for YDF and interpretability tools, boosting adoption by 15%.</li>
+                    </ul>
+                </div>
+            </section>
 
-      <hr class="section-divider">
+            <hr class="section-divider reveal">
 
-      <section id="firerequests" class="project-highlight">
-        <h2><span class="icon">🧪</span> FireRequests</h2>
-        <p><a href="https://github.com/rishiraj/firerequests" target="_blank" style="font-weight:bold; font-size: 1.1em;">FireRequests</a> is a high-performance, asynchronous HTTP client for ML workloads, used by companies like <strong>Roboflow</strong>.</p>
-        
-        <h4>Key Highlights:</h4>
-        <ul>
-          <li>⚡ 10x faster I/O for large payloads</li>
-          <li>🔄 Robust retry logic with <code>asyncio</code>, <code>aiohttp</code>, and <code>aiofiles</code></li>
-          <li>📦 Seamless support for Jupyter, batch processing, and streaming</li>
-          <li>🧵 Integrated with <code>nest_asyncio</code> for reliability under load</li>
-        </ul>
-      </section>
+            <section id="firerequests" class="project-highlight reveal">
+                <h2><span class="icon">🧪</span> FireRequests</h2>
+                <p><a href="https://github.com/rishiraj/firerequests" target="_blank" class="interactive-element" style="font-weight:bold; font-size: 1.1em;">FireRequests</a> is a high-performance, asynchronous HTTP client for ML workloads, used by companies like <strong>Roboflow</strong>.</p>
+                
+                <h4>Key Highlights:</h4>
+                <ul>
+                    <li>⚡ 10x faster I/O for large payloads</li>
+                    <li>🔄 Robust retry logic with <code>asyncio</code>, <code>aiohttp</code>, and <code>aiofiles</code></li>
+                    <li>📦 Seamless support for Jupyter, batch processing, and streaming</li>
+                    <li>🧵 Integrated with <code>nest_asyncio</code> for reliability under load</li>
+                </ul>
+            </section>
 
-      <footer class="site-footer">
-        <p>© 2024 Rishiraj Acharya. Inspired by the "whitish" liquid glass design language.</p>
-      </footer>
-    </main>
+            <footer class="site-footer reveal">
+                <p>© 2024 Rishiraj Acharya. Inspired by the "whitish" liquid glass design language.</p>
+            </footer>
+        </main>
+    </div>
 
     <script src="script.js"></script>
 </body>
