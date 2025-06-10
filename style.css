@@ -1,13 +1,11 @@
 :root {
-    --bg-color: #1a1a2e;
-    --card-color: rgba(255, 255, 255, 0.05);
-    --primary-text: #f0f0f0;
-    --secondary-text: #b3b3b3;
-    --accent-color: #6a82fb;
-    --glow-color-1: #00f2ff;
-    --glow-color-2: #8a3ffc;
-    --border-color: rgba(255, 255, 255, 0.2);
-    --blur-intensity: 20px;
+    --bg-color: #f0f2f5; /* Light grey background */
+    --glass-bg: rgba(255, 255, 255, 0.5); /* Semi-transparent white for glass */
+    --text-primary: #1d1d1f; /* Crisp, dark text */
+    --text-secondary: #5a5a5f;
+    --accent-color: #007aff; /* Apple-like blue for links */
+    --border-color: rgba(0, 0, 0, 0.1);
+    --highlight-bg: rgba(0, 122, 255, 0.08);
 }
 
 * {
@@ -17,98 +15,95 @@
 }
 
 body {
-    font-family: 'Inter', sans-serif;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     background-color: var(--bg-color);
-    color: var(--primary-text);
-    line-height: 1.7;
-    overflow-x: hidden; /* Prevent horizontal scroll */
+    /* Subtle grid background like in the video */
+    background-image: 
+        linear-gradient(rgba(0, 0, 0, 0.03) 1px, transparent 1px),
+        linear-gradient(to right, rgba(0, 0, 0, 0.03) 1px, transparent 1px);
+    background-size: 30px 30px;
+    color: var(--text-primary);
+    line-height: 1.6;
+    overflow-x: hidden;
 }
 
-/* The interactive, mouse-following blob */
+/* The moving light source */
 #blob {
-    background: linear-gradient(
-        to right,
-        var(--glow-color-1),
-        var(--glow-color-2)
+    /* A soft white light instead of a colored one */
+    background: radial-gradient(circle at center, 
+        rgba(255, 255, 255, 0.8) 0%, 
+        rgba(255, 255, 255, 0) 60%
     );
-    height: 350px;
-    width: 350px;
-    aspect-ratio: 1;
+    height: 600px; /* Larger and more diffuse */
+    width: 600px;
     position: fixed;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    border-radius: 50%;
-    filter: blur(120px);
-    opacity: 0.8;
+    pointer-events: none;
     z-index: 1;
-    pointer-events: none; /* Allows clicking through the blob */
-    transition: transform 0.1s ease-out; /* Smooths the movement */
+    filter: blur(80px); /* Soften the light */
+    transition: transform 0.15s ease-out;
 }
 
-/* Main content container with the glass effect */
+/* Main glass container */
 .container {
     max-width: 800px;
-    margin: 4rem auto;
-    padding: 2.5rem;
+    margin: 5rem auto;
+    padding: 3rem;
     position: relative;
-    z-index: 2; /* Sits above the blob */
+    z-index: 2;
     
-    /* The Glassmorphism Effect */
-    background: var(--card-color);
-    backdrop-filter: blur(var(--blur-intensity)) saturate(150%);
-    -webkit-backdrop-filter: blur(var(--blur-intensity)) saturate(150%);
-    border-radius: 24px;
-    border: 1px solid var(--border-color);
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+    /* The new "Whitish Glass" effect */
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-radius: 28px; /* Softer, more 'squircle' corners */
+
+    /* THE KEY: Multi-layered shadow to create the 3D edge */
+    box-shadow: 
+        /* 1. The bright inner edge */
+        inset 0 0 0 1.5px rgba(255, 255, 255, 0.9),
+        /* 2. A subtle top highlight to simulate light reflection */
+        inset 0 2px 10px rgba(255, 255, 255, 0.7),
+        /* 3. The soft, diffuse outer shadow for depth */
+        0 15px 40px rgba(0, 0, 0, 0.08);
     
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.container:hover {
-    box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.3);
-    transform: translateY(-5px);
-}
-
-/* Header section */
+/* Header */
 .profile-header {
     text-align: center;
-    margin-bottom: 2rem;
+    margin-bottom: 2.5rem;
 }
 
 .profile-picture {
     width: 140px;
     height: 140px;
     border-radius: 50%;
-    border: 3px solid var(--border-color);
-    box-shadow: 0 0 20px rgba(138, 63, 252, 0.3);
     margin-bottom: 1.5rem;
+    /* Apply the same glass edge effect to the picture */
+    box-shadow: 
+        inset 0 0 0 2px rgba(255, 255, 255, 0.9),
+        0 10px 20px rgba(0, 0, 0, 0.1);
 }
 
 .profile-header h1 {
-    font-size: 2.5rem;
+    font-size: 2.6rem;
     font-weight: 700;
     margin-bottom: 0.5rem;
-    color: #fff;
+    letter-spacing: -0.5px;
 }
 
 .profile-header b {
     font-weight: 400;
-    color: var(--secondary-text);
-    max-width: 500px;
+    color: var(--text-secondary);
+    max-width: 550px;
     margin: 0 auto;
-    display: block;
 }
 
 /* General section styling */
-section {
-    margin-bottom: 2.5rem;
-}
-
 section h2 {
     font-size: 1.8rem;
-    font-weight: 700;
-    color: #fff;
+    font-weight: 600;
     margin-bottom: 1.5rem;
     display: flex;
     align-items: center;
@@ -118,22 +113,23 @@ section h2 {
 .section-divider {
     border: 0;
     height: 1px;
-    background: linear-gradient(to right, transparent, var(--border-color), transparent);
+    background-color: rgba(0, 0, 0, 0.08);
     margin: 3rem 0;
 }
 
 p, ul {
-    color: var(--secondary-text);
+    color: var(--text-secondary);
     margin-bottom: 1rem;
+    font-size: 1.05rem;
 }
 
 strong, h4 {
-    color: var(--primary-text);
+    color: var(--text-primary);
+    font-weight: 500;
 }
 
 ul {
-    list-style-position: inside;
-    padding-left: 1rem;
+    padding-left: 1.25rem;
 }
 
 li {
@@ -144,37 +140,47 @@ a {
     color: var(--accent-color);
     text-decoration: none;
     font-weight: 500;
-    transition: color 0.3s ease, text-shadow 0.3s ease;
+    transition: color 0.2s ease;
 }
-
 a:hover {
-    color: #fff;
-    text-shadow: 0 0 8px var(--accent-color);
+    color: #0056b3;
+    text-decoration: underline;
 }
 
-/* Specific elements */
+/* Button with the new glass style */
 .button-link {
     display: inline-block;
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid var(--border-color);
-    padding: 0.5rem 1rem;
-    border-radius: 8px;
-    margin-right: 0.5rem;
-    margin-top: 0.5rem;
-    transition: background-color 0.3s ease, transform 0.2s ease;
+    background: rgba(255, 255, 255, 0.3);
+    border: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: 999px; /* Pill shape */
+    margin: 0.5rem 0.5rem 0.5rem 0;
+    font-weight: 500;
+    color: var(--text-primary);
+    text-decoration: none;
+    
+    box-shadow: 
+        inset 0 0 0 1px rgba(255, 255, 255, 0.9),
+        0 5px 15px rgba(0, 0, 0, 0.07);
+    
+    transition: all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
 .button-link:hover {
-    background-color: rgba(255, 255, 255, 0.2);
-    transform: translateY(-2px);
-    color: #fff;
+    transform: scale(0.98) translateY(1px); /* Press down effect */
+    box-shadow: 
+        inset 0 0 0 1px rgba(255, 255, 255, 0.9),
+        0 2px 8px rgba(0, 0, 0, 0.1);
+    color: var(--text-primary);
+    text-decoration: none;
 }
 
+/* Career and Project styling */
 .career-item {
     margin-bottom: 2rem;
     position: relative;
     padding-left: 1.5rem;
-    border-left: 2px solid var(--border-color);
+    border-left: 2px solid rgba(0, 0, 0, 0.08);
 }
 
 .career-item h4 {
@@ -182,67 +188,42 @@ a:hover {
     margin-bottom: 0.25rem;
 }
 
-.career-item em {
-    font-style: italic;
-    font-weight: 300;
-}
-
 .meta {
     font-size: 0.9rem;
     color: var(--accent-color);
     margin-bottom: 0.75rem;
-}
-
-code {
-    background-color: rgba(0, 0, 0, 0.3);
-    padding: 0.2em 0.4em;
-    border-radius: 4px;
-    font-family: 'Courier New', Courier, monospace;
+    font-weight: 500;
 }
 
 .project-highlight {
-    background: rgba(138, 63, 252, 0.1);
-    border-left: 4px solid var(--glow-color-2);
+    background: var(--highlight-bg);
+    border-left: 3px solid var(--accent-color);
     padding: 1.5rem;
-    border-radius: 8px;
+    border-radius: 12px;
     margin-top: 1rem;
 }
 
 .site-footer {
     text-align: center;
-    margin-top: 2rem;
+    margin-top: 3rem;
     font-size: 0.9rem;
-    color: var(--secondary-text);
+    color: var(--text-secondary);
     opacity: 0.7;
 }
 
-/* Responsive design for smaller screens */
+/* Responsive design */
 @media (max-width: 768px) {
-    body {
-        line-height: 1.6;
-    }
-    
     .container {
         margin: 2rem 1rem;
         padding: 1.5rem;
-    }
-    
-    #blob {
-        height: 250px;
-        width: 250px;
-        filter: blur(100px);
+        border-radius: 20px;
     }
     
     .profile-header h1 {
         font-size: 2rem;
     }
-    
-    section h2 {
-        font-size: 1.5rem;
-    }
-    
-    .profile-picture {
-        width: 120px;
-        height: 120px;
+
+    p, ul {
+        font-size: 1rem;
     }
 }
