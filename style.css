@@ -193,3 +193,150 @@ a:hover { color: #0056b3; text-decoration: underline; }
     .container-wrapper { perspective: none; }
     .container:hover { transform: none; }
 }
+
+/* --- STYLES FOR CONSULTATION.HTML --- */
+
+/* Back to Home Link */
+.back-link {
+    display: inline-block;
+    margin-bottom: 2rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    text-decoration: none;
+}
+.back-link:hover {
+    color: var(--accent-color);
+    text-decoration: none;
+}
+
+/* Header for the consultation page */
+.consultation-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+.consultation-header h1 {
+    font-size: 3rem;
+    letter-spacing: -1px;
+}
+.consultation-header p {
+    max-width: 650px;
+    margin: 1rem auto 0;
+    color: var(--text-primary);
+    font-size: 1.1rem;
+}
+
+/* Terms section with a clean grid */
+.terms-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+.term-item {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 1rem;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.term-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0,0,0,0.05);
+}
+.term-item strong {
+    display: block;
+    margin-bottom: 0.25rem;
+    color: var(--text-primary);
+}
+.term-item span {
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+/* "Do Get" vs "Don't Get" section styling */
+.pros-cons-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2.5rem;
+}
+.pros-cons-list {
+    list-style: none;
+    padding-left: 0;
+}
+.pros-cons-list li {
+    padding-left: 2rem;
+    position: relative;
+    margin-bottom: 0.8rem;
+}
+.pros-cons-list li::before {
+    position: absolute;
+    left: 0;
+    top: 2px;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+/* Custom icons for lists */
+.dont-get li::before {
+    content: '✗';
+    color: #e53e3e; /* Red */
+}
+.do-get li::before {
+    content: '✓';
+    color: #38a169; /* Green */
+}
+.do-get ul {
+    list-style: none;
+    padding-left: 1rem;
+    margin-top: 0.5rem;
+}
+.do-get ul li::before {
+    content: '·';
+    color: var(--text-secondary);
+}
+
+/* Speaking engagement cards */
+.speaking-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+.speaking-card {
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 16px;
+    padding: 1.5rem;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* Contact section */
+.contact-section {
+    text-align: center;
+}
+.button-link.large {
+    padding: 0.8rem 2rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+.contact-section blockquote {
+    max-width: 500px;
+    margin: 2rem auto 0;
+    padding: 1rem;
+    background: rgba(0, 0, 0, 0.02);
+    border-left: 4px solid var(--border-color);
+    border-radius: 0 8px 8px 0;
+    text-align: left;
+    font-style: italic;
+    color: var(--text-secondary);
+}
+
+/* Responsive adjustments for the new sections */
+@media (max-width: 768px) {
+    .consultation-header h1 {
+        font-size: 2.2rem;
+    }
+    .pros-cons-container,
+    .speaking-cards {
+        grid-template-columns: 1fr;
+    }
+}
