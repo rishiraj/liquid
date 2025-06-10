@@ -1,9 +1,9 @@
 :root {
-    --bg-color: #f0f2f5; /* Light grey background */
-    --glass-bg: rgba(255, 255, 255, 0.5); /* Semi-transparent white for glass */
-    --text-primary: #1d1d1f; /* Crisp, dark text */
+    --bg-color: #f0f2f5;
+    --glass-bg: rgba(255, 255, 255, 0.45);
+    --text-primary: #1d1d1f;
     --text-secondary: #5a5a5f;
-    --accent-color: #007aff; /* Apple-like blue for links */
+    --accent-color: #007aff;
     --border-color: rgba(0, 0, 0, 0.1);
     --highlight-bg: rgba(0, 122, 255, 0.08);
 }
@@ -17,7 +17,6 @@
 body {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     background-color: var(--bg-color);
-    /* Subtle grid background like in the video */
     background-image: 
         linear-gradient(rgba(0, 0, 0, 0.03) 1px, transparent 1px),
         linear-gradient(to right, rgba(0, 0, 0, 0.03) 1px, transparent 1px);
@@ -27,52 +26,60 @@ body {
     overflow-x: hidden;
 }
 
-/* The moving light source */
 #blob {
-    /* A soft white light instead of a colored one */
     background: radial-gradient(circle at center, 
         rgba(255, 255, 255, 0.8) 0%, 
         rgba(255, 255, 255, 0) 60%
     );
-    height: 600px; /* Larger and more diffuse */
+    height: 600px;
     width: 600px;
     position: fixed;
     pointer-events: none;
-    z-index: 1;
-    filter: blur(80px); /* Soften the light */
-    transition: transform 0.15s ease-out;
+    z-index: 0;
+    filter: blur(80px);
+    transition: transform 0.15s ease-out, width 0.3s ease, height 0.3s ease;
 }
 
-/* Main glass container */
+/* Interactive blob states */
+#blob.grow {
+    transform: scale(1.2);
+}
+#blob.focus {
+    width: 450px;
+    height: 450px;
+}
+
+.container-wrapper {
+    perspective: 2000px; /* Needed for the 3D tilt effect */
+    padding: 5rem 1rem;
+}
+
 .container {
     max-width: 800px;
-    margin: 5rem auto;
+    margin: 0 auto;
     padding: 3rem;
     position: relative;
     z-index: 2;
-    
-    /* The new "Whitish Glass" effect */
     background: var(--glass-bg);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border-radius: 28px; /* Softer, more 'squircle' corners */
-
-    /* THE KEY: Multi-layered shadow to create the 3D edge */
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-radius: 28px;
     box-shadow: 
-        /* 1. The bright inner edge */
         inset 0 0 0 1.5px rgba(255, 255, 255, 0.9),
-        /* 2. A subtle top highlight to simulate light reflection */
         inset 0 2px 10px rgba(255, 255, 255, 0.7),
-        /* 3. The soft, diffuse outer shadow for depth */
         0 15px 40px rgba(0, 0, 0, 0.08);
-    
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transform: rotateX(0) rotateY(0); /* Initial state for 3D tilt */
+    transition: transform 0.1s linear, box-shadow 0.3s ease;
 }
 
-/* Header */
-.profile-header {
-    text-align: center;
-    margin-bottom: 2.5rem;
+.profile-header h1 {
+    font-size: 2.6rem;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+}
+.profile-header b {
+    font-weight: 400;
+    color: var(--text-secondary);
 }
 
 .profile-picture {
@@ -80,34 +87,39 @@ body {
     height: 140px;
     border-radius: 50%;
     margin-bottom: 1.5rem;
-    /* Apply the same glass edge effect to the picture */
     box-shadow: 
         inset 0 0 0 2px rgba(255, 255, 255, 0.9),
         0 10px 20px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.profile-picture:hover {
+    transform: scale(1.05);
+    box-shadow: 
+        inset 0 0 0 2px rgba(255, 255, 255, 0.9),
+        0 15px 30px rgba(0, 0, 0, 0.15);
 }
 
-.profile-header h1 {
-    font-size: 2.6rem;
-    font-weight: 700;
-    margin-bottom: 0.5rem;
-    letter-spacing: -0.5px;
-}
-
-.profile-header b {
-    font-weight: 400;
-    color: var(--text-secondary);
-    max-width: 550px;
-    margin: 0 auto;
-}
-
-/* General section styling */
+/* Base styles for all sections and elements */
 section h2 {
     font-size: 1.8rem;
     font-weight: 600;
-    margin-bottom: 1.5rem;
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
+}
+p, ul { color: var(--text-secondary); font-size: 1.05rem; }
+strong, h4 { color: var(--text-primary); font-weight: 500; }
+ul { padding-left: 1.25rem; }
+a { color: var(--accent-color); text-decoration: none; font-weight: 500; transition: color 0.2s ease; }
+a:hover { color: #0056b3; text-decoration: underline; }
+
+/* Animation Classes */
+.reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
+                transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .section-divider {
@@ -117,90 +129,51 @@ section h2 {
     margin: 3rem 0;
 }
 
-p, ul {
-    color: var(--text-secondary);
-    margin-bottom: 1rem;
-    font-size: 1.05rem;
-}
-
-strong, h4 {
-    color: var(--text-primary);
-    font-weight: 500;
-}
-
-ul {
-    padding-left: 1.25rem;
-}
-
-li {
-    margin-bottom: 0.75rem;
-}
-
-a {
-    color: var(--accent-color);
-    text-decoration: none;
-    font-weight: 500;
-    transition: color 0.2s ease;
-}
-a:hover {
-    color: #0056b3;
-    text-decoration: underline;
-}
-
-/* Button with the new glass style */
 .button-link {
     display: inline-block;
     background: rgba(255, 255, 255, 0.3);
     border: none;
     padding: 0.6rem 1.2rem;
-    border-radius: 999px; /* Pill shape */
+    border-radius: 999px;
     margin: 0.5rem 0.5rem 0.5rem 0;
     font-weight: 500;
     color: var(--text-primary);
     text-decoration: none;
-    
     box-shadow: 
         inset 0 0 0 1px rgba(255, 255, 255, 0.9),
         0 5px 15px rgba(0, 0, 0, 0.07);
-    
     transition: all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
-
 .button-link:hover {
-    transform: scale(0.98) translateY(1px); /* Press down effect */
+    transform: scale(1.05);
     box-shadow: 
         inset 0 0 0 1px rgba(255, 255, 255, 0.9),
-        0 2px 8px rgba(0, 0, 0, 0.1);
+        0 8px 20px rgba(0, 0, 0, 0.12);
     color: var(--text-primary);
     text-decoration: none;
 }
 
-/* Career and Project styling */
 .career-item {
     margin-bottom: 2rem;
     position: relative;
-    padding-left: 1.5rem;
+    padding: 1rem 1rem 1rem 1.5rem;
     border-left: 2px solid rgba(0, 0, 0, 0.08);
+    border-radius: 0 8px 8px 0;
+    transition: transform 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
 }
-
-.career-item h4 {
-    font-size: 1.2rem;
-    margin-bottom: 0.25rem;
+.career-item:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+    transform: translateX(10px);
+    border-color: var(--accent-color);
 }
-
-.meta {
-    font-size: 0.9rem;
-    color: var(--accent-color);
-    margin-bottom: 0.75rem;
-    font-weight: 500;
-}
+.career-item h4 { font-size: 1.2rem; }
+.meta { font-size: 0.9rem; color: var(--accent-color); font-weight: 500; }
 
 .project-highlight {
     background: var(--highlight-bg);
     border-left: 3px solid var(--accent-color);
     padding: 1.5rem;
     border-radius: 12px;
-    margin-top: 1rem;
 }
 
 .site-footer {
@@ -211,19 +184,12 @@ a:hover {
     opacity: 0.7;
 }
 
-/* Responsive design */
 @media (max-width: 768px) {
-    .container {
-        margin: 2rem 1rem;
-        padding: 1.5rem;
-        border-radius: 20px;
-    }
-    
-    .profile-header h1 {
-        font-size: 2rem;
-    }
-
-    p, ul {
-        font-size: 1rem;
-    }
+    .container-wrapper { padding: 2rem 1rem; }
+    .container { padding: 1.5rem; border-radius: 20px; }
+    .profile-header h1 { font-size: 2rem; }
+    p, ul { font-size: 1rem; }
+    /* Disable 3D tilt on mobile for better performance */
+    .container-wrapper { perspective: none; }
+    .container:hover { transform: none; }
 }
